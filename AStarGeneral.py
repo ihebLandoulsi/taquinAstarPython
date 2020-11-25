@@ -1,5 +1,5 @@
 from abc import abstractmethod
-class transition:
+class Transition:
     def __init__(self,etat,value):
         self.etatSuivant=None
         self.value=None
