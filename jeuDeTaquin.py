@@ -10,10 +10,13 @@ class HeurAlgo:
 
 class EtatTaquin(Etat):
     heurAlgo=None
+    @staticmethod
+    def setAlgo(algo):
+        EtatTaquin.heurAlgo=algo
     def __init__(self,matrix):
         self.matrix=matrix
     def getHeur(self, etatfinal):
-        EtatTaquin.heurAlgo.execute(self,etatfinal)
+        return EtatTaquin.heurAlgo.execute(self,etatfinal)
 
     def Equals(self, other):
         return np.array_equal(self.matrix,other.matrix)
@@ -29,28 +32,28 @@ class EtatTaquin(Etat):
             aux[x][y]=aux[x+1][y]
             aux[x+1][y]=0
             etat=EtatTaquin(aux)
-            list.push(Transition(etat,1))
+            list.append(Transition(etat,1))
         if (x != 0):
             # la case vide peut se deplacer en haut
             aux = np.array(self.matrix)
             aux[x][y] = aux[x - 1][y]
             aux[x - 1][y] = 0
             etat = EtatTaquin(aux)
-            list.push(Transition(etat, 1))
-        if (x != dimension - 1):
+            list.append(Transition(etat, 1))
+        if (y != dimension - 1):
             # la case vide peut se deplacer a droite
             aux = np.array(self.matrix)
             aux[x][y] = aux[x][y + 1]
             aux[x][y + 1] = 0
             etat = EtatTaquin(aux)
-            list.push(Transition(etat, 1))
-        if (x != dimension - 1):
+            list.append(Transition(etat, 1))
+        if (y != 0):
             # la case vide peut se deplacer a gauche
             aux = np.array(self.matrix)
             aux[x][y] = aux[x][y - 1]
             aux[x][y - 1] = 0
             etat = EtatTaquin(aux)
-            list.push(Transition(etat, 1))
+            list.append(Transition(etat, 1))
         return list
 
 
