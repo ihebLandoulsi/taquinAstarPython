@@ -19,16 +19,16 @@ def main():
     print("Sil vous plait choisissez  l'algorithme heuristique :")
     print("1/manhattan")
     print("2/malplace")
-    c=input("choix:")
+    c=input("choix: ")
     if c=="1":
         algo=ManhattanAlgo()
     elif c=="2":
         algo=MalPlaceAlgo()
     else:
-        print("Erreur choix par défaut à été choisi (manhattan algo)")
+        print("Erreur ! choix par défaut à été choisi (manhattan algo)")
         algo=ManhattanAlgo()
     EtatTaquin.setAlgo(algo)
-    d=int(input("choisir une dimension:"))
+    d=int(input("choisissez une dimension: "))
     print("saisissez la matrice initiale:")
     init=saisieMatrix(d)
     print("------------------------------------------------")
@@ -40,13 +40,17 @@ def main():
     print("------------------------------------------------")
     etatInit=EtatTaquin(init)
     etatFinal=EtatTaquin(final)
-    l=AStar(etatInit,etatFinal)
-    if len(l)==0:
+    result=AStar(etatInit,etatFinal)
+    if len(result)==0:
         print("pas de solution")
     else:
-        l.reverse()
-        for i in l:
-            print(i.etat.matrix)
+        result.reverse()
+        i=0
+        for n in result:
+            print("Etat [",i,"]:")
+            i+=1
+            print(n.etat.matrix)
+            print()
 
 
 class Main:
